@@ -2,18 +2,20 @@
 
 public class Dice
 {
-    private Random rnd = new Random();
-    private int sides;
-    private int? facingUp = null; 
-    
+    private static Random rnd = new Random();
+    private static int sides;
+    private static int facingUp = 0;
+    private bool? numberComp = null;
+
     public Dice(int s)
     {
         sides = s;
     }
 
-    private void Roll()
+    private static void Roll()
     {
-        facingUp = rnd.Next(1, sides + 1);
+        facingUp = 0;
+        facingUp += rnd.Next(1, sides + 1);
     }
 
     public int getUp()
@@ -21,4 +23,38 @@ public class Dice
         Roll();
         return (int)facingUp;
     }
+
+    public int getFU()
+    {
+        return (int)facingUp;
+    }
+
+    private void checkWin()
+    {
+        int val = getUp() + getUp();
+        if (val % 2 == 1)
+        {
+            numberComp = false;
+        }
+        else
+        {
+            numberComp = true;
+        }
+        Console.WriteLine(val);
+    }
+
+    public bool getWin()
+    {
+        checkWin();
+        return (bool)numberComp;
+    }
+
+    public bool getRawWin()
+    {
+        return (bool)numberComp;
+    }
 }
+
+    
+
+
